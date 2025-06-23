@@ -2,6 +2,8 @@
 FROM eclipse-temurin:17-jdk-focal as build
 WORKDIR /app
 COPY . .
+# Add this line to give execute permissions to the Maven wrapper
+RUN chmod +x ./mvnw
 RUN ./mvnw clean install -DskipTests
 
 # Stage 2: Create the final image
