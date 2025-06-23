@@ -8,5 +8,5 @@ RUN ./mvnw clean install -DskipTests
 FROM eclipse-temurin:17-jre-focal
 WORKDIR /app
 COPY --from=build /app/target/NadezhdaExams-0.0.1-SNAPSHOT.jar app.jar
-EXPOSE 8080 # Or the port your app listens on, like ${PORT} from application.properties
+EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]
