@@ -1,4 +1,3 @@
-// Path: src/main/java/org/springboot/config/WebConfig.java
 package org.springboot.config;
 
 import org.springframework.context.annotation.Configuration;
@@ -13,22 +12,21 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-            .allowedOriginPatterns("http://localhost:3000")  // ✅ must be specific
-            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-            .allowedHeaders("*")
-            .allowCredentials(true); // ✅ you are using cookies or frontend auth
+                
+                .allowedOriginPatterns(
+                    "http://localhost:3000",                  
+                    "https://examportal-w6lh.onrender.com",  
+                    "https://your-react-frontend-on-hostinger.com" 
+                )
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // This maps requests starting with /uploads/profile_photos/
-        // to the file system path where your images are stored.
-        // It's important to use "file:" prefix for file system paths.
-        // Ensure this path is correct relative to your Spring Boot application's root directory
-        // or provide an absolute path if necessary (e.g., "file:/path/to/your/project/uploads/profile_photos/").
-        registry.addResourceHandler("/" + UPLOAD_DIR + "**") // URL path pattern
-                .addResourceLocations("file:" + UPLOAD_DIR); // File system path
+        
+        registry.addResourceHandler("/" + UPLOAD_DIR + "**") 
+                .addResourceLocations("file:" + UPLOAD_DIR); 
     }
-    
-    
 }
